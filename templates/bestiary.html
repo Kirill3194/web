@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bestiary-container">
+    <h2>Monster Bestiary</h2>
+    
+    <form method="GET" class="search-form">
+        <input type="text" name="search" placeholder="Search by weakness...">
+        <button type="submit">Search</button>
+    </form>
+    
+    <form method="POST" class="monster-form">
+        <h3>Add Monster</h3>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="type" placeholder="Type" required>
+        <input type="text" name="weakness" placeholder="Weakness" required>
+        <input type="hidden" name="action" value="add">
+        <button type="submit">Add</button>
+    </form>
+    
+    <div class="monster-list">
+        {% for monster in monsters %}
+        <div class="monster-card">
+            <h3>{{ monster.name }}</h3>
+            <p>Type: {{ monster.type }}</p>
+            <p>Weakness: {{ monster.weakness }}</p>
+            <form method="POST">
+                <input type="hidden" name="name" value="{{ monster.name }}">
+                <input type="hidden" name="action" value="delete">
+                <button type="submit" class="danger">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

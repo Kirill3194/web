@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Witcher Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h1>{{ witcher.name }}</h1>
+        <p>School of the {{ witcher.school }}</p>
+    </div>
+    
+    <div class="profile-section">
+        <h2>Signs</h2>
+        <ul class="signs-list">
+            {% for sign in witcher.signs %}
+            <li>{{ sign }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="profile-section">
+        <h2>Statistics</h2>
+        <table class="stats-table">
+            <tr>
+                <th>Toxicity Level</th>
+                <td>{{ witcher.toxicity }}%</td>
+            </tr>
+            <tr>
+                <th>Vitality</th>
+                <td>{{ witcher.vitality }}%</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="profile-section">
+        <h2>Current Status</h2>
+        <a href="{{ url_for('witcher_stats') }}" class="button">View JSON Stats</a>
+    </div>
+</div>
+{% endblock %}

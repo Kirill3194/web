@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Witcher Login</h2>
+    <form method="POST">
+        <label for="username">Witcher Name:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="school">School:</label>
+        <select id="school" name="school" required>
+            {% for school in schools %}
+            <option value="{{ school }}">{{ school }} School</option>
+            {% endfor %}
+        </select>
+        
+        <label for="rank">Rank:</label>
+        <select id="rank" name="rank">
+            <option value="Novice">Novice</option>
+            <option value="Master">Master</option>
+        </select>
+        
+        <button type="submit">Enter the Path</button>
+    </form>
+</div>
+{% endblock %}

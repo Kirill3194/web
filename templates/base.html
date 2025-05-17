@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witcher Guild - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Witcher Guild</h1>
+        <nav>
+            {% if 'username' in session %}
+                <span>Welcome, {{ session['username'] }} of {{ session['school'] }} School</span>
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('bestiary') }}">Bestiary</a>
+                <a href="{{ url_for('alchemy') }}">Alchemy</a>
+                {% if session['rank'] == 'Master' %}
+                    <a href="{{ url_for('contracts') }}">Contracts</a>
+                {% endif %}
+                <a href="{{ url_for('reviews') }}">Reviews</a>
+                {% if session['school'] == 'Wolf' %}
+                    <a href="{{ url_for('kaermorhen') }}">Kaer Morhen</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Witcher Guild © 2025</p>
+    </footer>
+</body>
+</html>
